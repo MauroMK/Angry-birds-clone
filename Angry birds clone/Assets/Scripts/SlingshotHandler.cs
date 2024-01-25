@@ -5,15 +5,23 @@ using UnityEngine.InputSystem;
 
 public class SlingshotHandler : MonoBehaviour
 {
+    #region Variables
+
+    [Header("Line Renderers")]
     [SerializeField] private LineRenderer leftLineRenderer;
     [SerializeField] private LineRenderer rightLineRenderer;
 
+    [Header("Transform References")]
     [SerializeField] private Transform leftStartPosition;
     [SerializeField] private Transform rightStartPosition;
     [SerializeField] private Transform centerPosition;
     [SerializeField] private Transform idlePosition;
 
+    [Header("Slingshot Tweaks")]
     [SerializeField] private float maxDistance = 3.5f;
+
+    [Header("Bird")]
+    [SerializeField] private GameObject angryBirdPrefab;
 
     private SlingshotArea slingshotArea;
 
@@ -21,9 +29,16 @@ public class SlingshotHandler : MonoBehaviour
 
     private bool clickedWithinArea;
 
-    void Start()
+    #endregion
+
+    void Awake()
     {
+        leftLineRenderer.enabled = false;
+        rightLineRenderer.enabled = false;
+
         slingshotArea = FindObjectOfType<SlingshotArea>();
+
+        SpawnAngryBirds();
     }
 
     void Update()
@@ -44,8 +59,16 @@ public class SlingshotHandler : MonoBehaviour
         }
     }
 
+    #region Slingshot Methods
+
     private void DrawLines()
     {
+        if (!leftLineRenderer.enabled && !rightLineRenderer.enabled)
+        {
+            leftLineRenderer.enabled = true;
+            rightLineRenderer.enabled = true;
+        }
+
         // Gets the screen position of the mouse
         Vector3 touchPosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
 
@@ -63,4 +86,15 @@ public class SlingshotHandler : MonoBehaviour
         rightLineRenderer.SetPosition(0, position);
         rightLineRenderer.SetPosition(1, rightStartPosition.position);
     }
+
+    #endregion
+
+    #region Angry Bird Methods
+
+    private void SpawnAngryBirds()
+    {
+
+    }
+
+    #endregion
 }
