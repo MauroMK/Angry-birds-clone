@@ -15,13 +15,32 @@ public class SlingshotHandler : MonoBehaviour
 
     [SerializeField] private float maxDistance = 3.5f;
 
+    private SlingshotArea slingshotArea;
+
     private Vector2 slingshotLinesPosition;
+
+    private bool clickedWithinArea;
+
+    void Start()
+    {
+        slingshotArea = FindObjectOfType<SlingshotArea>();
+    }
 
     void Update()
     {
-        if (Mouse.current.leftButton.isPressed)
+        if (Mouse.current.leftButton.wasPressedThisFrame && slingshotArea.IsWithinSlingshotArea())
+        {
+            clickedWithinArea = true;
+        }
+
+        if (Mouse.current.leftButton.isPressed && clickedWithinArea)
         {
             DrawLines();
+        }
+
+        if (Mouse.current.leftButton.wasReleasedThisFrame)
+        {
+            clickedWithinArea = false;
         }
     }
 
