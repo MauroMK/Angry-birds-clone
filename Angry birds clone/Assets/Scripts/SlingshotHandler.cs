@@ -23,6 +23,8 @@ public class SlingshotHandler : MonoBehaviour
     [Header("Bird")]
     [SerializeField] private GameObject angryBirdPrefab;
 
+    private GameObject spawnedBird;
+
     private SlingshotArea slingshotArea;
 
     private Vector2 slingshotLinesPosition;
@@ -51,6 +53,7 @@ public class SlingshotHandler : MonoBehaviour
         if (Mouse.current.leftButton.isPressed && clickedWithinArea)
         {
             DrawLines();
+            PositionAndRotateBird();
         }
 
         if (Mouse.current.leftButton.wasReleasedThisFrame)
@@ -63,12 +66,6 @@ public class SlingshotHandler : MonoBehaviour
 
     private void DrawLines()
     {
-        if (!leftLineRenderer.enabled && !rightLineRenderer.enabled)
-        {
-            leftLineRenderer.enabled = true;
-            rightLineRenderer.enabled = true;
-        }
-
         // Gets the screen position of the mouse
         Vector3 touchPosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
 
@@ -80,6 +77,12 @@ public class SlingshotHandler : MonoBehaviour
 
     private void SetLines(Vector2 position)
     {
+        if (!leftLineRenderer.enabled && !rightLineRenderer.enabled)
+        {
+            leftLineRenderer.enabled = true;
+            rightLineRenderer.enabled = true;
+        }
+
         leftLineRenderer.SetPosition(0, position);
         leftLineRenderer.SetPosition(1, leftStartPosition.position);
 
@@ -93,7 +96,14 @@ public class SlingshotHandler : MonoBehaviour
 
     private void SpawnAngryBirds()
     {
+        SetLines(idlePosition.position);
 
+        spawnedBird = Instantiate(angryBirdPrefab, idlePosition.position, Quaternion.identity);
+    }
+
+    private void PositionAndRotateBird()
+    {
+        spawnedBird.transform.position = slingshotLinesPosition;
     }
 
     #endregion
