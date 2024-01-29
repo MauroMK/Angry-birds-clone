@@ -179,6 +179,7 @@ MonoBehaviour:
   idlePosition: {fileID: 627436913}
   maxDistance: 3.5
   angryBirdPrefab: {fileID: 6652831102972517941, guid: f1ee4113ae91ff442accca28d7ed8513, type: 3}
+  birdOffset: 0.275
 --- !u!1 &268922346
 GameObject:
   m_ObjectHideFlags: 0
@@ -944,7 +945,7 @@ LineRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 9
   m_Positions:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}

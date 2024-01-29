@@ -22,12 +22,17 @@ public class SlingshotHandler : MonoBehaviour
 
     [Header("Bird")]
     [SerializeField] private GameObject angryBirdPrefab;
+    [SerializeField] private float birdOffset;
+
+    [Header("Directions")]
+    private Vector2 slingshotLinesPosition;
+
+    private Vector2 direction;
+    private Vector2 directionNormalized;
 
     private GameObject spawnedBird;
 
     private SlingshotArea slingshotArea;
-
-    private Vector2 slingshotLinesPosition;
 
     private bool clickedWithinArea;
 
@@ -73,6 +78,10 @@ public class SlingshotHandler : MonoBehaviour
         slingshotLinesPosition = centerPosition.position + Vector3.ClampMagnitude(touchPosition - centerPosition.position, maxDistance);
         
         SetLines(slingshotLinesPosition);
+
+        // Casting the Vector2 before centralPosition.position to transform the Vector3 into Vector2
+        direction = (Vector2)centerPosition.position - slingshotLinesPosition;
+        directionNormalized = direction.normalized;
     }
 
     private void SetLines(Vector2 position)
@@ -98,12 +107,17 @@ public class SlingshotHandler : MonoBehaviour
     {
         SetLines(idlePosition.position);
 
-        spawnedBird = Instantiate(angryBirdPrefab, idlePosition.position, Quaternion.identity);
+        Vector2 dir = (centerPosition.position - idlePosition.position).normalized;
+        Vector2 spawnPosition = (Vector2)idlePosition.position + dir * birdOffset;
+
+        spawnedBird = Instantiate(angryBirdPrefab, spawnPosition, Quaternion.identity);
+        spawnedBird.transform.right = dir;
     }
 
     private void PositionAndRotateBird()
     {
-        spawnedBird.transform.position = slingshotLinesPosition;
+        spawnedBird.transform.position = slingshotLinesPosition + directionNormalized * birdOffset;
+        spawnedBird.transform.right = directionNormalized;
     }
 
     #endregion
