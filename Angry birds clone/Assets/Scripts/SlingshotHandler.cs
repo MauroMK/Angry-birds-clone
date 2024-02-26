@@ -20,6 +20,7 @@ public class SlingshotHandler : MonoBehaviour
     [Header("Slingshot Tweaks")]
     [SerializeField] private float maxDistance = 3.5f;
     [SerializeField] private float shotForce;
+    [SerializeField] private float timeBetweenBirdRespawn = 2f;
 
     [Header("Bird")]
     [SerializeField] private Angrybird angryBirdPrefab;
@@ -36,6 +37,7 @@ public class SlingshotHandler : MonoBehaviour
     private SlingshotArea slingshotArea;
 
     private bool clickedWithinArea;
+    private bool birdOnSlingShot;
 
     #endregion
 
@@ -56,17 +58,28 @@ public class SlingshotHandler : MonoBehaviour
             clickedWithinArea = true;
         }
 
-        if (Mouse.current.leftButton.isPressed && clickedWithinArea)
+        if (Mouse.current.leftButton.isPressed && clickedWithinArea && birdOnSlingShot)
         {
             DrawLines();
             PositionAndRotateBird();
         }
 
-        if (Mouse.current.leftButton.wasReleasedThisFrame)
+        if (Mouse.current.leftButton.wasReleasedThisFrame && birdOnSlingShot)
         {
-            clickedWithinArea = false;
+            if (GameManager.instance.HasEnoughShots())
+            {
+                clickedWithinArea = false;
+                birdOnSlingShot = false;
 
-            spawnedBird.LauchBird(direction, shotForce);
+                spawnedBird.LauchBird(direction, shotForce);
+                GameManager.instance.UseShot();
+                SetLines(centerPosition.position);
+
+                if(GameManager.instance.HasEnoughShots())
+                {
+                    StartCoroutine(SpawnAngryBirdAfterTime());
+                }
+            }
         }
     }
 
@@ -115,12 +128,21 @@ public class SlingshotHandler : MonoBehaviour
 
         spawnedBird = Instantiate(angryBirdPrefab, spawnPosition, Quaternion.identity);
         spawnedBird.transform.right = dir;
+
+        birdOnSlingShot = true;
     }
 
     private void PositionAndRotateBird()
     {
         spawnedBird.transform.position = slingshotLinesPosition + directionNormalized * birdOffset;
         spawnedBird.transform.right = directionNormalized;
+    }
+
+    private IEnumerator SpawnAngryBirdAfterTime()
+    {
+        yield return new WaitForSeconds(timeBetweenBirdRespawn);
+
+        SpawnAngryBirds();
     }
 
     #endregion
