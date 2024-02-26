@@ -178,7 +178,8 @@ MonoBehaviour:
   centerPosition: {fileID: 2001484585}
   idlePosition: {fileID: 627436913}
   maxDistance: 3.5
-  angryBirdPrefab: {fileID: 6652831102972517941, guid: f1ee4113ae91ff442accca28d7ed8513, type: 3}
+  shotForce: 9
+  angryBirdPrefab: {fileID: 6873621629645380918, guid: f1ee4113ae91ff442accca28d7ed8513, type: 3}
   birdOffset: 0.275
 --- !u!1 &268922346
 GameObject:

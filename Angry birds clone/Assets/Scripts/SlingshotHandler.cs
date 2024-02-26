@@ -19,9 +19,10 @@ public class SlingshotHandler : MonoBehaviour
 
     [Header("Slingshot Tweaks")]
     [SerializeField] private float maxDistance = 3.5f;
+    [SerializeField] private float shotForce;
 
     [Header("Bird")]
-    [SerializeField] private GameObject angryBirdPrefab;
+    [SerializeField] private Angrybird angryBirdPrefab;
     [SerializeField] private float birdOffset;
 
     [Header("Directions")]
@@ -30,7 +31,7 @@ public class SlingshotHandler : MonoBehaviour
     private Vector2 direction;
     private Vector2 directionNormalized;
 
-    private GameObject spawnedBird;
+    private Angrybird spawnedBird;
 
     private SlingshotArea slingshotArea;
 
@@ -64,6 +65,8 @@ public class SlingshotHandler : MonoBehaviour
         if (Mouse.current.leftButton.wasReleasedThisFrame)
         {
             clickedWithinArea = false;
+
+            spawnedBird.LauchBird(direction, shotForce);
         }
     }
 
