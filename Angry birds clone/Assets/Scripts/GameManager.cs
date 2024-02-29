@@ -10,17 +10,22 @@ public class GameManager : MonoBehaviour
 
     private int usedNumberOfShots;
 
+    private IconHandler iconHandler;
+
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
         }
+
+        iconHandler = FindObjectOfType<IconHandler>();
     }
 
     public void UseShot()
     {
         usedNumberOfShots++;
+        iconHandler.UseShot(usedNumberOfShots);
     }
 
     public bool HasEnoughShots()
