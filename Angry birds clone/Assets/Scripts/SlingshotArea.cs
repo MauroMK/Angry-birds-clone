@@ -10,7 +10,7 @@ public class SlingshotArea : MonoBehaviour
     public bool IsWithinSlingshotArea()
     {
         // Gets the screen position of the mouse
-        Vector2 worldPosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        Vector2 worldPosition = Camera.main.ScreenToWorldPoint(InputManager.mousePosition);
 
         // Checks if the physics are touching some collider
         if (Physics2D.OverlapPoint(worldPosition, slingshotAreaMask))

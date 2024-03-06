@@ -53,18 +53,18 @@ public class SlingshotHandler : MonoBehaviour
 
     void Update()
     {
-        if (Mouse.current.leftButton.wasPressedThisFrame && slingshotArea.IsWithinSlingshotArea())
+        if (InputManager.wasLeftMouseButtonPressed && slingshotArea.IsWithinSlingshotArea())
         {
             clickedWithinArea = true;
         }
 
-        if (Mouse.current.leftButton.isPressed && clickedWithinArea && birdOnSlingShot)
+        if (InputManager.isLeftMouseButtonPressed && clickedWithinArea && birdOnSlingShot)
         {
             DrawLines();
             PositionAndRotateBird();
         }
 
-        if (Mouse.current.leftButton.wasReleasedThisFrame && birdOnSlingShot)
+        if (InputManager.wasLeftMouseButtonReleased && birdOnSlingShot)
         {
             if (GameManager.instance.HasEnoughShots())
             {
@@ -88,7 +88,7 @@ public class SlingshotHandler : MonoBehaviour
     private void DrawLines()
     {
         // Gets the screen position of the mouse
-        Vector3 touchPosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        Vector3 touchPosition = Camera.main.ScreenToWorldPoint(InputManager.mousePosition);
 
         // ClampMagnitude doesn't let the vector pass certain lenght
         slingshotLinesPosition = centerPosition.position + Vector3.ClampMagnitude(touchPosition - centerPosition.position, maxDistance);
