@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private float secondsToWait = 3f;
+    [SerializeField] private GameObject restartScreen;
+    [SerializeField] private SlingshotHandler slingshotHandler;
 
     public static GameManager instance;
 
@@ -72,13 +74,14 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            LoseGame();
+            RestartGame();
         }
     }
 
     public void RemovePig(Pig pig)
     {
         pigList.Remove(pig);
+        CheckForAllDeadPigs();
     }
 
     private void CheckForAllDeadPigs()
@@ -91,12 +94,13 @@ public class GameManager : MonoBehaviour
 
     #region Win/Lose
 
-    private void WinGame()
+    public void WinGame()
     {
-        Debug.Log("Win");
+        restartScreen.SetActive(true);
+        slingshotHandler.enabled = false;
     }
 
-    private void LoseGame()
+    public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
