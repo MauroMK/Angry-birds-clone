@@ -437,9 +437,71 @@ MonoBehaviour:
   rightStartPosition: {fileID: 1483233105}
   centerPosition: {fileID: 2001484585}
   idlePosition: {fileID: 627436913}
+  elasticTransform: {fileID: 1326732199}
   maxDistance: 3.5
   shotForce: 9
   timeBetweenBirdRespawn: 2
+  elasticDivider: 1.2
+  elasticCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 13.983107
+      outSlope: 13.983107
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.089393586
+      value: 1.25
+      inSlope: -6.670713
+      outSlope: -6.670713
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.011822227
+    - serializedVersion: 3
+      time: 0.14828345
+      value: 0.9002708
+      inSlope: 3.0359027
+      outSlope: 3.0359027
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.30425942
+      outWeight: 0.034027804
+    - serializedVersion: 3
+      time: 0.20436504
+      value: 1.0443499
+      inSlope: -2.2996056
+      outSlope: -2.2996056
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.70696354
+    - serializedVersion: 3
+      time: 0.2413678
+      value: 1.0023209
+      inSlope: 0.22090854
+      outSlope: -0.003059303
+      tangentMode: 65
+      weightedMode: 0
+      inWeight: 0.91602975
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: -0.003059303
+      outSlope: -0.003059303
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   angryBirdPrefab: {fileID: 6873621629645380918, guid: f1ee4113ae91ff442accca28d7ed8513, type: 3}
   birdOffset: 0.275
 --- !u!1 &210768882
@@ -2552,6 +2614,37 @@ Transform:
   - {fileID: 755309249}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1326732198
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1326732199}
+  m_Layer: 0
+  m_Name: ElasticTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1326732199
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1326732198}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1398719139}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1357196423
 GameObject:
   m_ObjectHideFlags: 0
@@ -2626,7 +2719,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1398719139}
   m_Layer: 0
-  m_Name: StripPositions
+  m_Name: Transforms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2649,6 +2742,7 @@ Transform:
   - {fileID: 1483233105}
   - {fileID: 2001484585}
   - {fileID: 627436913}
+  - {fileID: 1326732199}
   m_Father: {fileID: 151164226}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1404109387
