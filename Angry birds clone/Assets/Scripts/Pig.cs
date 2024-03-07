@@ -8,6 +8,8 @@ public class Pig : MonoBehaviour
     [SerializeField] private float maxHealth = 3f;
     [SerializeField] private float damageThreshold = 0.2f;
 
+    [SerializeField] private GameObject pigDeathParticle;
+
     private float currentHealth;
 
     private void Awake()
@@ -28,6 +30,8 @@ public class Pig : MonoBehaviour
     private void Die()
     {
         GameManager.instance.RemovePig(this);
+
+        Instantiate(pigDeathParticle, transform.position, transform.rotation);
 
         Destroy(gameObject);
     }
