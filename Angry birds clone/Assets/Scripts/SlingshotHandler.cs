@@ -68,7 +68,7 @@ public class SlingshotHandler : MonoBehaviour
             PositionAndRotateBird();
         }
 
-        if (InputManager.wasLeftMouseButtonReleased && birdOnSlingShot)
+        if (InputManager.wasLeftMouseButtonReleased && birdOnSlingShot && clickedWithinArea)
         {
             if (GameManager.instance.HasEnoughShots())
             {
