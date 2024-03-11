@@ -29,6 +29,10 @@ public class SlingshotHandler : MonoBehaviour
     [Header("Bird")]
     [SerializeField] private Angrybird angryBirdPrefab;
     [SerializeField] private float birdOffset;
+    
+    [Header("Scripts")]
+    private SlingshotArea slingshotArea;
+    [SerializeField] private CameraManager cameraManager;
 
     [Header("Directions")]
     private Vector2 slingshotLinesPosition;
@@ -38,7 +42,6 @@ public class SlingshotHandler : MonoBehaviour
 
     private Angrybird spawnedBird;
 
-    private SlingshotArea slingshotArea;
 
     private bool clickedWithinArea;
     private bool birdOnSlingShot;
@@ -64,6 +67,7 @@ public class SlingshotHandler : MonoBehaviour
             if (birdOnSlingShot)
             {
                 AudioManager.instance.PlaySound("PullSlinghshot");
+                cameraManager.SwitchToFollowCam(spawnedBird.transform);
             }
         }
 
@@ -133,6 +137,7 @@ public class SlingshotHandler : MonoBehaviour
 
     private void SpawnAngryBirds()
     {
+        elasticTransform.DOComplete();
         SetLines(idlePosition.position);
 
         Vector2 dir = (centerPosition.position - idlePosition.position).normalized;
@@ -155,6 +160,8 @@ public class SlingshotHandler : MonoBehaviour
         yield return new WaitForSeconds(timeBetweenBirdRespawn);
 
         SpawnAngryBirds();
+
+        cameraManager.SwitchToIdleCam();
     }
 
     #endregion

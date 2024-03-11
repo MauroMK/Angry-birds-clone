@@ -113,10 +113,10 @@ TextureImporter:
       name: Sky
       rect:
         serializedVersion: 2
-        x: 49
-        y: 266
-        width: 488
-        height: 299
+        x: 50
+        y: 267
+        width: 486
+        height: 298
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,9 +134,9 @@ TextureImporter:
       name: ground
       rect:
         serializedVersion: 2
-        x: 590
+        x: 591
         y: 258
-        width: 344
+        width: 341
         height: 202
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -181,7 +181,7 @@ TextureImporter:
         width: 340
         height: 38
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
