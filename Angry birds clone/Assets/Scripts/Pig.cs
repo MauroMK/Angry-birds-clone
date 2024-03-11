@@ -31,6 +31,8 @@ public class Pig : MonoBehaviour
     {
         GameManager.instance.RemovePig(this);
 
+        AudioManager.instance.PlaySound("Pop");
+
         Instantiate(pigDeathParticle, transform.position, transform.rotation);
 
         Destroy(gameObject);
