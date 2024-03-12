@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private float secondsToWait = 3f;
     [SerializeField] private GameObject restartScreen;
     [SerializeField] private SlingshotHandler slingshotHandler;
+    [SerializeField] private Image nextLevelImage;
 
     public static GameManager instance;
 
@@ -35,6 +37,8 @@ public class GameManager : MonoBehaviour
         {
             pigList.Add(pigs[i]);
         }
+
+        nextLevelImage.enabled = false;
     }
 
     public void UseShot()
@@ -99,12 +103,24 @@ public class GameManager : MonoBehaviour
     {
         restartScreen.SetActive(true);
         slingshotHandler.enabled = false;
+
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int maxLevels = SceneManager.sceneCountInBuildSettings;
+        if (currentSceneIndex +1 < maxLevels)
+        {
+            nextLevelImage.enabled = true;
+        }
     }
 
     public void RestartGame()
     {
         DOTween.Clear(true);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void LoadNextScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     #endregion
