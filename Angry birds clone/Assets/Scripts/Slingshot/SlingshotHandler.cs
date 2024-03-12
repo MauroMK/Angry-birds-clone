@@ -25,6 +25,7 @@ public class SlingshotHandler : MonoBehaviour
     [SerializeField] private float timeBetweenBirdRespawn = 2f;
     [SerializeField] private float elasticDivider = 1.2f;
     [SerializeField] private AnimationCurve elasticCurve;
+    [SerializeField] private float maxAnimationTime = 1f;
 
     [Header("Bird")]
     [SerializeField] private Angrybird angryBirdPrefab;
@@ -183,10 +184,10 @@ public class SlingshotHandler : MonoBehaviour
     private IEnumerator AnimateSlingShotLines(Transform trans, float time)
     {
         float elapsedTime = 0f;
-        while (elapsedTime < time)
+        while (elapsedTime < time && elapsedTime < maxAnimationTime)
         {
             elapsedTime += Time.deltaTime;
-
+            
             SetLines(trans.position);
 
             yield return null;
